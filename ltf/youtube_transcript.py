@@ -62,27 +62,3 @@ class YoutubeTranscript:
         cleaned = re.sub(r'(\xa0|\n|\[Music])', ' ', text)
         # Replace multiple whitespaces with single whitespace
         return re.sub(r'\s+', ' ', cleaned)
-
-
-if __name__ == "__main__":
-
-    # Test for different languages within Language-Transfer
-
-    german = 'https://www.youtube.com/watch?v=Nuz_WVUcT14'
-    greek = 'https://www.youtube.com/watch?v=JQ2YpjNbnXo'
-    french = 'https://www.youtube.com/watch?v=_OutwlbyeJQ'
-    spanish = 'https://www.youtube.com/watch?v=sgQF91socYg'
-    swahili = 'https://www.youtube.com/watch?v=uKNCgN2bstA'
-    turkish = 'https://www.youtube.com/watch?v=WHfZn9O5cAw'
-
-    language_videos = [german, greek, french, spanish, swahili, turkish]
-
-    for yt_url in language_videos:
-        yt_title, yt_transcript = YoutubeTranscript().download_from_url(video_url=yt_url)
-        print('TITLE:', yt_title)
-        print('TRANSCRIPT:', yt_transcript[:500])
-        print('\n')
-
-
-# TODO: write unit tests with pytest
-# TODO: add a logger !?
