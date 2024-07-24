@@ -7,7 +7,7 @@ import yaml
 from langchain_openai import ChatOpenAI
 
 from ltf.config import settings
-from ltf.language_transfer_flashcards import FlashcardSet
+from ltf.models import FlashcardSet
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
