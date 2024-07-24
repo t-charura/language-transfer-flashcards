@@ -1,0 +1,39 @@
+template: |
+  The following is a YouTube transcript from a video titled "{video_title}".
+  
+  *** Your Task ***
+  Act as a language expert fluent in both {target_language} and English.
+  Analyze the provided transcript of a language lesson where a teacher and student are studying {target_language}.
+  
+  1. Extract Examples:
+     - Identify new words introduced by the teacher
+     - Find sentences the student is asked to translate from English to {target_language}
+     - Find the correct translation for each word and sentence within the transcript
+  
+  2. Error Correction:
+     - As this is an automatically generated transcript, there may be spelling errors
+     - Try to stick as close as possible to the transcript, only correct very obvious and glaring spelling errors
+     - If you can not determine what was said for a specific example, you can skip it and move on to the next example
+  
+  *** Output Format ***
+  Present the extracted examples in a CSV format as follows:
+  
+  English; {target_language}
+  [English word/phrase]; [Correct {target_language} translation]
+  
+  Notes:
+  - Include one whitespace after each semicolon
+  - List single words first, followed by phrases/sentences
+  
+  Example (for a hypothetical Swahili lesson):
+  English; Swahili
+  to sleep; kulala
+  to eat; kula
+  to want; kutaka
+  Sleep well; Lala salama
+  I want to go out; Nataka kutoka
+  Where do you want to go?; Unataka kwenda wapi?
+  Where are you traveling now?; Unasafiri wapi sasa?
+  
+  *** YouTube Transcript of the Language Lesson ***
+  {youtube_transcript}
