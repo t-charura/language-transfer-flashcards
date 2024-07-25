@@ -38,10 +38,11 @@ def clean_youtube_title(video_title: str) -> str:
     Returns:
         The cleaned video title
     """
-    allowed_chars = re.sub(r'[^a-z0-9 ]', '', video_title.lower())
+    allowed_chars = re.sub(r'[^a-z0-9 ]', '', video_title.lower()).strip()
     return (
         re.sub(r'\s+', ' ', allowed_chars)  # replace multiple spaces with a single space
         .replace(' ', '_')  # replace spaces with underscores
+        [0:200]  # truncate to 200 characters
     )
 
 
