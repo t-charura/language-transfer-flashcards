@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from ltf.models import AvailableTargetLanguages
 
@@ -16,8 +16,7 @@ class Settings(BaseSettings):
     # Your target language from Language Transfer:
     TARGET_LANGUAGE: AvailableTargetLanguages
 
-    class Config:
-        env_file = CONFIG_DIR / '.env'
+    model_config = SettingsConfigDict(env_file=(CONFIG_DIR / '.env'))
 
 
 settings = Settings()
