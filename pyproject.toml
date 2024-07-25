@@ -5,11 +5,27 @@ description = ""
 authors = ["Tendai <tendai.charura@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+packages  = [
+    { include = "ltf", from = "." }
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pydantic-settings = "^2.3.4"
+langchain-community = "^0.2.9"
+youtube-transcript-api = "^0.6.2"
+pytube = "^15.0.0"
+langchain-openai = "^0.1.17"
+typer = "^0.12.3"
+rich = "^13.7.1"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+ltf = "ltf.cli:app"
