@@ -2,10 +2,10 @@ import csv
 import re
 from pathlib import Path
 from typing import Union, Any, Dict
-from rich import print
 
 import yaml
 from langchain_openai import ChatOpenAI
+from rich import print
 
 from ltf.config import settings
 from ltf.models import FlashcardSet
@@ -20,10 +20,19 @@ def load_template():
     return prompt.get('template')
 
 
-def get_llm(api_key: str, mini: bool = False) -> ChatOpenAI:
-    """Return LLM instance"""
+def get_llm(api_key: str, model_name: str) -> ChatOpenAI:
+    """
+    Return an LLM instance
+
+    Args:
+        api_key: OpenAI API key
+        model_name: OpenAI model name to use
+
+    Returns:
+        LLM instance
+    """
     return ChatOpenAI(
-        model_name=settings.GPT_4o_MINI if mini else settings.GPT_4o,
+        model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
         api_key=api_key,
         temperature=0
     )

@@ -62,19 +62,20 @@ class LanguageTransferFlashcards:
             "youtube_transcript": self.transcript
         })
 
-    def run(self, api_key: str = None, delimiter: str = ';') -> None:
+    def run(self, model_name: str, api_key: str, delimiter: str) -> None:
         """
         Create Flashcards from YouTube video and save them as CSV file
 
         Args:
-            delimiter: Delimiter to use in CSV file, defaults to ';'
+            model_name: OpenAI model name to use
             api_key: OpenAI API key
+            delimiter: Delimiter to use in CSV file
         """
         if not api_key:
             api_key = settings.OPENAI_API_KEY
 
-        llm = utils.get_llm(api_key=api_key, mini=True)
-        print(f'Using: [green bold]{llm.model_name}[/green bold]')
+        llm = utils.get_llm(api_key=api_key, model_name=model_name)
+        print(f'Using: [green bold]{llm.model_name}[/green bold]\n')
 
         flashcards = self._create_flashcards(llm=llm)
         utils.save_flashcards_as_csv_file(flashcards, filename=self.title, delimiter=delimiter)

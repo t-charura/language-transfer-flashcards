@@ -1,5 +1,5 @@
-from typing import List
 from enum import Enum
+from typing import List
 
 from langchain_core.pydantic_v1 import BaseModel, Field
 
@@ -34,3 +34,14 @@ class AvailableTargetLanguages(str, Enum):
     SPANISH = "Spanish"
     SWAHILI = "Swahili"
     TURKISH = "Turkish"
+
+
+class AvailableModels(str, Enum):
+    """Enum containing all available models."""
+    # o-Models
+    GPT_4o = 'gpt-4o'
+    GPT_4o_MINI = 'gpt-4o-mini'
+
+    # Regular Models
+    GPT_4_TURBO = 'gpt-4-turbo'
+    GPT_3_5_TURBO = 'gpt-3.5-turbo'  # not recommended - use 4o mini
