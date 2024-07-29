@@ -2,6 +2,7 @@ import csv
 import re
 from pathlib import Path
 from typing import Union, Any, Dict
+from rich import print
 
 import yaml
 from langchain_openai import ChatOpenAI
@@ -59,11 +60,14 @@ def save_flashcards_as_csv_file(
         filename: The name of the CSV file to be created.
         delimiter: The delimiter used in the CSV file. Defaults to ';'.
     """
-    with open(f'{clean_youtube_title(filename)}.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    filename = f'{clean_youtube_title(filename)}.csv'
+    with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
         writer = csv.writer(csvfile, delimiter=delimiter)
 
         for flashcard in flashcard_set.flashcards:
             writer.writerow([flashcard.english, flashcard.target_language])
+
+    _show_file_location(filename)
 
 
 def save_prompt_as_txt_file(
@@ -77,5 +81,19 @@ def save_prompt_as_txt_file(
         prompt: The prompt to be saved as a text file.
         filename: The name of the text file to be created.
     """
-    with open(f'{clean_youtube_title(filename)}.txt', 'w', encoding='utf-8') as file:
+    filename = f'{clean_youtube_title(filename)}.txt'
+    with open(filename, 'w', encoding='utf-8') as file:
         file.write(prompt)
+
+    _show_file_location(filename)
+
+
+def _show_file_location(filename: str) -> None:
+    """
+    Print the location of the created file.
+
+    Args:
+        filename: The name of the file to be printed.
+    """
+    cwd = Path.cwd()
+    print(f'File saved at: "{cwd / filename}"')
