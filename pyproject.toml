@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "language-transfer-flashcards"
 version = "0.1.0"
-description = ""
+description = "CLI that transforms the content of Language Transfer lessons into flashcards"
 authors = ["Tendai <tendai.charura@gmail.com>"]
 license = "MIT"
 readme = "README.md"
