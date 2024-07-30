@@ -1,6 +1,11 @@
 import pytest
 
-from ltf.models import Flashcard, FlashcardSet, AvailableTargetLanguages, AvailableModels
+from ltf.models import (
+    Flashcard,
+    FlashcardSet,
+    AvailableTargetLanguages,
+    AvailableModels,
+)
 
 
 def test_flashcard_creation():
@@ -17,7 +22,7 @@ def test_flashcard_missing_field():
 def test_flashcard_set_creation():
     flashcards = [
         Flashcard(english="Hello", target_language="Hola"),
-        Flashcard(english="Goodbye", target_language="Adiós")
+        Flashcard(english="Goodbye", target_language="Adiós"),
     ]
     flashcard_set = FlashcardSet(flashcards=flashcards)
     assert len(flashcard_set.flashcards) == 2
