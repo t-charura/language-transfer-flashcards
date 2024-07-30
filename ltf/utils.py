@@ -13,11 +13,11 @@ from ltf.models import FlashcardSet
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
-def load_template():
+def load_template() -> str:
     """Return prompt template as string"""
-    with open(PROJECT_ROOT / 'ltf' / 'data' / 'prompt.yaml', 'r') as f:
+    with open(PROJECT_ROOT / "ltf" / "data" / "prompt.yaml", "r") as f:
         prompt = yaml.safe_load(f)
-    return prompt.get('template')
+    return prompt.get("template")
 
 
 def get_llm(api_key: str, model_name: str) -> ChatOpenAI:
@@ -34,7 +34,7 @@ def get_llm(api_key: str, model_name: str) -> ChatOpenAI:
     return ChatOpenAI(
         model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
         api_key=api_key,
-        temperature=0
+        temperature=0,
     )
 
 
@@ -48,18 +48,12 @@ def clean_youtube_title(video_title: str) -> str:
     Returns:
         The cleaned video title
     """
-    allowed_chars = re.sub(r'[^a-z0-9 ]', '', video_title.lower()).strip()
-    return (
-        re.sub(r'\s+', ' ', allowed_chars)  # replace multiple spaces with a single space
-        .replace(' ', '_')  # replace spaces with underscores
-        [0:200]  # truncate to 200 characters
-    )
+    allowed_chars = re.sub(r"[^a-z0-9 ]", "", video_title.lower()).strip()
+    return re.sub(r"\s+", " ", allowed_chars).replace(" ", "_")[0:200]
 
 
 def save_flashcards_as_csv_file(
-        flashcard_set: Union[FlashcardSet, Dict[str, Any]],
-        filename: str,
-        delimiter: str = ';'
+    flashcard_set: Union[FlashcardSet, Dict[str, Any]], filename: str, delimiter: str
 ) -> None:
     """
     Create a CSV file with the flashcards in the FlashcardSet object.
@@ -67,10 +61,10 @@ def save_flashcards_as_csv_file(
     Args:
         flashcard_set: The FlashcardSet object containing the flashcards.
         filename: The name of the CSV file to be created.
-        delimiter: The delimiter used in the CSV file. Defaults to ';'.
+        delimiter: The delimiter used in the CSV file.
     """
-    filename = f'{clean_youtube_title(filename)}.csv'
-    with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
+    filename = f"{clean_youtube_title(filename)}.csv"
+    with open(filename, "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile, delimiter=delimiter)
 
         for flashcard in flashcard_set.flashcards:
@@ -79,10 +73,7 @@ def save_flashcards_as_csv_file(
     _show_file_location(filename)
 
 
-def save_prompt_as_txt_file(
-        prompt: str,
-        filename: str
-) -> None:
+def save_prompt_as_txt_file(prompt: str, filename: str) -> None:
     """
     Save the prompt as a text file.
 
@@ -90,8 +81,8 @@ def save_prompt_as_txt_file(
         prompt: The prompt to be saved as a text file.
         filename: The name of the text file to be created.
     """
-    filename = f'{clean_youtube_title(filename)}.txt'
-    with open(filename, 'w', encoding='utf-8') as file:
+    filename = f"{clean_youtube_title(filename)}.txt"
+    with open(filename, "w", encoding="utf-8") as file:
         file.write(prompt)
 
     _show_file_location(filename)
