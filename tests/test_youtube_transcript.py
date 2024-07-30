@@ -2,7 +2,7 @@ from unittest.mock import patch, MagicMock
 
 import pytest
 
-from ltf.youtube_transcript import YoutubeTranscript
+from ltf import YoutubeTranscript
 
 
 @pytest.fixture
