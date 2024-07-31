@@ -66,7 +66,7 @@ class LanguageTransferFlashcards:
             }
         )
 
-    def run(self, model_name: str, api_key: str, delimiter: str) -> None:
+    def run(self, model_name: str, api_key: str, delimiter: str, exclude: str) -> None:
         """
         Create Flashcards from YouTube video and save them as CSV file
 
@@ -74,6 +74,7 @@ class LanguageTransferFlashcards:
             model_name: OpenAI model name to use
             api_key: OpenAI API key
             delimiter: Delimiter to use in CSV file
+            exclude: Directory containing CSV files with words and sentences to exclude
         """
         if not api_key:
             api_key = settings.OPENAI_API_KEY
@@ -83,7 +84,7 @@ class LanguageTransferFlashcards:
 
         flashcards = self._create_flashcards(llm=llm)
         utils.save_flashcards_as_csv(
-            flashcards, filename=self.title, delimiter=delimiter
+            flashcards, filename=self.title, delimiter=delimiter, exclude=exclude
         )
 
     def save_prompt(self) -> None:
@@ -97,6 +98,3 @@ class LanguageTransferFlashcards:
         ).text
 
         utils.save_prompt_as_txt(prompt_as_string, filename=self.title)
-
-
-# TODO: remove duplicate flashcards based on existing CSV files

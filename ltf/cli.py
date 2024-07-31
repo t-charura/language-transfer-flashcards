@@ -37,12 +37,18 @@ def create_flashcards(
     delimiter: str = typer.Option(
         ",", "--delimiter", "-d", help="Delimiter to use in CSV file"
     ),
+    exclude: str = typer.Option(
+        None,
+        "--exclude",
+        "-e",
+        help="Directory containing CSV files with words and sentences to exclude",
+    ),
 ):
     flashcard_extraction = LanguageTransferFlashcards(
         url, target_language=target_language
     )
     flashcard_extraction.run(
-        model_name=model_name, api_key=api_key, delimiter=delimiter
+        model_name=model_name, api_key=api_key, delimiter=delimiter, exclude=exclude
     )
 
 

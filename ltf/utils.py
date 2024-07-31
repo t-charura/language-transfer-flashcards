@@ -53,7 +53,10 @@ def clean_youtube_title(video_title: str) -> str:
 
 
 def save_flashcards_as_csv(
-    flashcard_set: Union[FlashcardSet, Dict[str, Any]], filename: str, delimiter: str
+    flashcard_set: Union[FlashcardSet, Dict[str, Any]],
+    filename: str,
+    delimiter: str,
+    exclude: str,
 ) -> None:
     """
     Create a CSV file with the flashcards in the FlashcardSet object.
@@ -62,15 +65,50 @@ def save_flashcards_as_csv(
         flashcard_set: The FlashcardSet object containing the flashcards.
         filename: The name of the CSV file to be created.
         delimiter: The delimiter used in the CSV file.
+        exclude: The directory containing CSV files with words and sentences to exclude.
     """
+    existing_flashcards = _load_existing_flashcards(exclude) if exclude else set()
+
     filename = f"{clean_youtube_title(filename)}.csv"
     with open(filename, "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile, delimiter=delimiter)
 
-        for flashcard in flashcard_set.flashcards:
-            writer.writerow([flashcard.english, flashcard.target_language])
+        writer.writerows(
+            [
+                [flashcard.english, flashcard.target_language]
+                for flashcard in flashcard_set.flashcards
+                if not exclude
+                or flashcard.english.strip().lower() not in existing_flashcards
+            ]
+        )
 
     _show_file_location(filename)
+
+
+def _load_existing_flashcards(directory: str) -> set:
+    """
+    Load existing flashcards from CSV files in the specified directory. Only get the English words.
+
+    Args:
+        directory: The directory containing the CSV files.
+
+    Returns:
+        A set of English words.
+    """
+    keys = set()
+    directory_path = Path(directory)
+    if not directory_path.exists():
+        print(
+            f'Directory: "{directory}" does not exist. '
+            f"Continuing without loading existing flashcards.\n"
+        )
+        return keys
+
+    return {
+        row[0].strip().lower()
+        for csv_file in directory_path.glob("*.csv")
+        for row in csv.reader(csv_file.open("r"))
+    }
 
 
 def save_prompt_as_txt(prompt: str, filename: str) -> None:
