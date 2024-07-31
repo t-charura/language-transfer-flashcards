@@ -78,11 +78,11 @@ class LanguageTransferFlashcards:
         if not api_key:
             api_key = settings.OPENAI_API_KEY
 
-        llm = utils.get_llm(api_key=api_key, model_name=model_name)
+        llm = utils.initialize_llm(api_key=api_key, model_name=model_name)
         print(f"Using: [green bold]{llm.model_name}[/green bold]\n")
 
         flashcards = self._create_flashcards(llm=llm)
-        utils.save_flashcards_as_csv_file(
+        utils.save_flashcards_as_csv(
             flashcards, filename=self.title, delimiter=delimiter
         )
 
@@ -96,7 +96,7 @@ class LanguageTransferFlashcards:
             }
         ).text
 
-        utils.save_prompt_as_txt_file(prompt_as_string, filename=self.title)
+        utils.save_prompt_as_txt(prompt_as_string, filename=self.title)
 
 
 # TODO: remove duplicate flashcards based on existing CSV files
