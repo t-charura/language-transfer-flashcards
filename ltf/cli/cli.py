@@ -2,7 +2,9 @@ import typer
 from rich import print
 
 from ltf import LanguageTransferFlashcards
-from ltf.config import CONFIG_DIR
+from ltf import utils
+from ltf.cli import validate
+from ltf.config import ENV_DIR
 from ltf.models import AvailableTargetLanguages, AvailableModels
 
 app = typer.Typer(name="Language Transfer Flashcards")
@@ -20,6 +22,7 @@ def create_flashcards(
         None,
         "--target-language",
         "-l",
+        callback=validate.target_language,
         help="Target language taught in video. If None, takes value from .env file, located in: ~/.ltf/.env",
     ),
     model_name: AvailableModels = typer.Option(
@@ -32,6 +35,7 @@ def create_flashcards(
         None,
         "--api-key",
         "-k",
+        callback=validate.api_key,
         help="OpenAI API key. If None, takes value from .env file, located in: ~/.ltf/.env",
     ),
     delimiter: str = typer.Option(
@@ -64,6 +68,7 @@ def create_prompt(
         None,
         "--target-language",
         "-l",
+        callback=validate.target_language,
         help="Target language taught in video. If None, takes value from .env file",
     ),
 ):
@@ -75,10 +80,9 @@ def create_prompt(
 
 @app.command(name="env-location", help="Show location of your .env file")
 def env_location():
-    print(
-        "Language-Transfer Flashcards (ltf) is looking for the .env file at the following location:\n"
-        f'--> [green bold]{CONFIG_DIR / ".env"}[/green bold] <--\n\n'
-        "If the file does not exist, please create it and set the following variables:\n"
-        '"OPENAI_API_KEY", "OPENAI_MODEL_NAME" and "TARGET_LANGUAGE". \n\n'
-        "Check https://github.com/t-charura/language-transfer-flashcards for an example .env file."
-    )
+    print(utils.env_information(ENV_DIR / ".env"))
+
+
+@app.command(name="env-values", help="Show current values of your .env file")
+def env_values():
+    utils.read_env_file(ENV_DIR / ".env")
