@@ -7,7 +7,6 @@ import yaml
 from langchain_openai import ChatOpenAI
 from rich import print
 
-from ltf.config import settings
 from ltf.models import FlashcardSet
 
 PROJECT_DIR = Path(__file__).resolve().parent.parent
@@ -32,7 +31,7 @@ def initialize_llm(api_key: str, model_name: str) -> ChatOpenAI:
         LLM instance
     """
     return ChatOpenAI(
-        model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
+        model_name=model_name,
         api_key=api_key,
         temperature=0,
     )

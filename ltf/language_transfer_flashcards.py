@@ -76,10 +76,10 @@ class LanguageTransferFlashcards:
             delimiter: Delimiter to use in CSV file
             exclude: Directory containing CSV files with words and sentences to exclude
         """
-        if not api_key:
-            api_key = settings.OPENAI_API_KEY
-
-        llm = utils.initialize_llm(api_key=api_key, model_name=model_name)
+        llm = utils.initialize_llm(
+            api_key=api_key if api_key else settings.OPENAI_API_KEY,
+            model_name=model_name if model_name else settings.OPENAI_MODEL_NAME,
+        )
         print(f"Using: [green bold]{llm.model_name}[/green bold]\n")
 
         flashcards = self._create_flashcards(llm=llm)
