@@ -1,21 +1,22 @@
 from pathlib import Path
+from typing import Optional
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from ltf.models import AvailableTargetLanguages, AvailableModels
 
-CONFIG_DIR = Path.home() / ".ltf"
+ENV_DIR = Path.home() / ".ltf"
 
 
 class Settings(BaseSettings):
     # OPENAI settings
-    OPENAI_API_KEY: str
-    OPENAI_MODEL_NAME: AvailableModels
+    OPENAI_API_KEY: Optional[str] = None
+    OPENAI_MODEL_NAME: AvailableModels = AvailableModels.GPT_4o
 
     # Your target language from Language Transfer:
-    TARGET_LANGUAGE: AvailableTargetLanguages
+    TARGET_LANGUAGE: Optional[AvailableTargetLanguages] = None
 
-    model_config = SettingsConfigDict(env_file=(CONFIG_DIR / ".env"))
+    model_config = SettingsConfigDict(env_file=(ENV_DIR / ".env"))
 
 
 settings = Settings()
