@@ -27,7 +27,7 @@ class LanguageTransferFlashcards:
         """
         self.title, self.transcript = YoutubeTranscript().download_from_url(url)
         self.target_language = (
-            target_language if target_language else settings.TARGET_LANGUAGE
+            target_language if target_language else settings.TARGET_LANGUAGE.value
         )
         self.prompt_template = PromptTemplate(
             template=utils.load_template(),
