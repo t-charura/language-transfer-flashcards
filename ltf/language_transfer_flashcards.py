@@ -1,6 +1,8 @@
+import typer
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableSerializable
 from langchain_openai import ChatOpenAI
+from openai import AuthenticationError
 from rich import print
 
 from ltf import YoutubeTranscript
@@ -17,7 +19,7 @@ class LanguageTransferFlashcards:
     process them with a language model, and generate flashcards.
     """
 
-    def __init__(self, url: str, target_language: str = None):
+    def __init__(self, url: str, target_language: str):
         """
         Initialize the LanguageTransferFlashcards class
 
@@ -56,15 +58,22 @@ class LanguageTransferFlashcards:
 
         Returns:
             A set of flashcards
+
+        Raises:
+            AuthenticationError: If OpenAI API key is invalid
         """
         extraction_chain = self._get_chain(llm=llm)
-        return extraction_chain.invoke(
-            {
-                "video_title": self.title,
-                "target_language": self.target_language,
-                "youtube_transcript": self.transcript,
-            }
-        )
+        try:
+            return extraction_chain.invoke(
+                {
+                    "video_title": self.title,
+                    "target_language": self.target_language,
+                    "youtube_transcript": self.transcript,
+                }
+            )
+        except AuthenticationError as e:
+            print(e)
+            raise typer.Abort()
 
     def run(self, model_name: str, api_key: str, delimiter: str, exclude: str) -> None:
         """
