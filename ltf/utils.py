@@ -134,3 +134,29 @@ def _show_file_location(filename: str) -> None:
     """
     cwd = Path.cwd()
     print(f'File saved at: "{cwd / filename}"')
+
+
+def env_information(file_path: Path) -> str:
+    return (
+        "Language Transfer Flashcards (ltf) is looking for the .env file at the following location:\n"
+        f"--> [green bold]{file_path}[/green bold] <--\n\n"
+        "File must contain the following variables: 'OPENAI_API_KEY', 'OPENAI_MODEL_NAME' and 'TARGET_LANGUAGE'. \n"
+        "To see all valid values for these variables, run 'ltf csv --help'\n\n"
+        "Check https://github.com/t-charura/language-transfer-flashcards for an example .env file."
+    )
+
+
+def read_env_file(file_path: Union[Path, str]) -> None:
+    """
+    Read the .env file and print its contents.
+
+    Args:
+        file_path: The path to the .env file.
+    """
+    with open(file_path, "r") as file:
+        lines = file.readlines()
+        for line in lines:
+            # Strip leading/trailing whitespace and skip comments and empty lines
+            line = line.strip()
+            if line and not line.startswith("#"):
+                print(line)
