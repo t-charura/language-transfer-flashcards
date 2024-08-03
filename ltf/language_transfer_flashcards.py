@@ -28,9 +28,7 @@ class LanguageTransferFlashcards:
             target_language: The language that is taught in the YouTube video
         """
         self.title, self.transcript = YoutubeTranscript().download_from_url(url)
-        self.target_language = (
-            target_language if target_language else settings.TARGET_LANGUAGE.value
-        )
+        self.target_language = target_language
         self.prompt_template = PromptTemplate(
             template=utils.load_template(),
             input_variables=["video_title", "target_language", "youtube_transcript"],
@@ -72,9 +70,11 @@ class LanguageTransferFlashcards:
                 }
             )
         except AuthenticationError:
-            print('Incorrect API key provided: '
-                  'You can find your API key at https://platform.openai.com/account/api-keys.\n'
-                  'Please update the value in your .env file.')
+            print(
+                "Incorrect API key provided: "
+                "You can find your API key at https://platform.openai.com/account/api-keys.\n"
+                "Please update the value in your .env file."
+            )
             raise typer.Abort()
 
     def run(self, model_name: str, api_key: str, delimiter: str, exclude: str) -> None:
