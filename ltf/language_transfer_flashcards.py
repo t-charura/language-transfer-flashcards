@@ -71,8 +71,10 @@ class LanguageTransferFlashcards:
                     "youtube_transcript": self.transcript,
                 }
             )
-        except AuthenticationError as e:
-            print(e)
+        except AuthenticationError:
+            print('Incorrect API key provided: '
+                  'You can find your API key at https://platform.openai.com/account/api-keys.\n'
+                  'Please update the value in your .env file.')
             raise typer.Abort()
 
     def run(self, model_name: str, api_key: str, delimiter: str, exclude: str) -> None:
