@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL_NAME: AvailableModels = AvailableModels.GPT_4o
 
-    # Your target language from Language Transfer:
+    # The language you are currently learning form Language Transfer
     TARGET_LANGUAGE: Optional[AvailableTargetLanguages] = None
 
     model_config = SettingsConfigDict(env_file=(ENV_DIR / ".env"))
