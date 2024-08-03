@@ -21,11 +21,7 @@ def target_language(value: Optional[AvailableTargetLanguages]) -> str:
         and the user has not provided a value in the CLI
     """
     if value is None and settings.TARGET_LANGUAGE is None:
-        raise typer.BadParameter(
-            "Target language is required when it is not set in the .env file. \n\n"
-            "Recommended: Set the value in the .env file. For more information run 'ltf env-location'.\n"
-            "Or set the value in the CLI"
-        )
+        raise typer.BadParameter(bad_parameter_information("Target language"))
     return value.value
 
 
@@ -44,9 +40,22 @@ def api_key(value: Optional[str]):
         and the user has not provided a value in the CLI
     """
     if value is None and settings.OPENAI_API_KEY is None:
-        raise typer.BadParameter(
-            "OpenAI API key is required when it is not set in the .env file. \n\n"
-            "Recommended: Set the value in the .env file. For more information run 'ltf env-location'.\n"
-            "Or set the value in the CLI"
-        )
+        raise typer.BadParameter(bad_parameter_information("OpenAI API key"))
     return value
+
+
+def bad_parameter_information(parameter_name: str) -> str:
+    """
+    Return a message explaining that the parameter is required when it is not set in the .env file
+
+    Args:
+        parameter_name: Name of the CLI parameter
+
+    Returns:
+        Message explaining that the parameter is required when it is not set in the .env file
+    """
+    return (
+        f"{parameter_name} is required when it is not set in the .env file. \n\n"
+        "Recommended: Set the value in the .env file. For more information run 'ltf env-location'.\n"
+        "Or set the value in the CLI"
+    )
