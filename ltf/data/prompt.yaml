@@ -19,11 +19,11 @@ template: |
   Present the extracted examples in a CSV format as follows:
   
   English; {target_language}
-  [English word/phrase]; [Correct {target_language} translation]
+  [English word/phrase]; [{target_language} translation]
   
   Notes:
   - Include one whitespace after each semicolon
-  - List single words first, followed by phrases/sentences
+  - List single words first, followed by phrases and sentences
   
   Example (for a hypothetical Swahili lesson):
   English; Swahili

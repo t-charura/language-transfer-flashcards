@@ -27,23 +27,21 @@ class YoutubeTranscript:
         try:
             # Try loading the transcript from the YouTube URL - not all videos have transcripts
             loader = YoutubeLoader.from_youtube_url(
-                youtube_url=video_url,
-                language='en',
-                add_video_info=True
+                youtube_url=video_url, language="en", add_video_info=True
             )
             yt_document = loader.load()[0]
         except ValueError:
             raise ValueError(
-                'Please provide a valid YouTube URL '
+                "Please provide a valid YouTube URL "
                 'in the form of "https://www.youtube.com/watch?v=VIDEO_ID".'
             )
         except IndexError:
             raise IndexError(
-                'Video does not have a transcript. Please try another video.'
+                "Video does not have a transcript. Please try another video."
             )
 
         return (
-            self._clean_text(yt_document.metadata.get('title')),
+            self._clean_text(yt_document.metadata.get("title")),
             self._clean_text(yt_document.page_content),
         )
 
@@ -59,6 +57,6 @@ class YoutubeTranscript:
             The cleaned text.
         """
         # Remove unwanted characters
-        cleaned = re.sub(r'(\xa0|\n|\[Music])', ' ', text)
+        cleaned = re.sub(r"(\xa0|\n|\[Music])", " ", text)
         # Replace multiple whitespaces with single whitespace
-        return re.sub(r'\s+', ' ', cleaned)
+        return re.sub(r"\s+", " ", cleaned)
