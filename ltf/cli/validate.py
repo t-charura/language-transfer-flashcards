@@ -20,9 +20,11 @@ def target_language(value: Optional[AvailableTargetLanguages]) -> str:
         typer.BadParameter: If the target language is not set in the .env file
         and the user has not provided a value in the CLI
     """
-    if value is None and settings.TARGET_LANGUAGE is None:
-        raise typer.BadParameter(bad_parameter_information("Target language"))
-    return value.value
+    if value is None:
+        if settings.TARGET_LANGUAGE is None:
+            raise typer.BadParameter(get_missing_parameter_message("Target language"))
+        return settings.TARGET_LANGUAGE.value
+    return value
 
 
 def api_key(value: Optional[str]):
@@ -39,12 +41,14 @@ def api_key(value: Optional[str]):
         typer.BadParameter: If the OpenAI API key is not set in the .env file
         and the user has not provided a value in the CLI
     """
-    if value is None and settings.OPENAI_API_KEY is None:
-        raise typer.BadParameter(bad_parameter_information("OpenAI API key"))
+    if value is None:
+        if settings.OPENAI_API_KEY is None:
+            raise typer.BadParameter(get_missing_parameter_message("OpenAI API key"))
+        return settings.OPENAI_API_KEY
     return value
 
 
-def bad_parameter_information(parameter_name: str) -> str:
+def get_missing_parameter_message(parameter_name: str) -> str:
     """
     Return a message explaining that the parameter is required when it is not set in the .env file
 
