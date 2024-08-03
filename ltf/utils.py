@@ -148,11 +148,20 @@ def env_information(file_path: Path) -> str:
 
 def read_env_file(file_path: Union[Path, str]) -> None:
     """
-    Read the .env file and print its contents.
+    Read the .env file and print the content to the console.
 
     Args:
         file_path: The path to the .env file.
+
+    Raises:
+        FileNotFoundError: If the .env file does not exist.
     """
+    if not Path(file_path).exists():
+        raise FileNotFoundError(
+            f".env file does not exist at: '{file_path}'. \n\n"
+            f"Please create the file. For more information run 'ltf env-location'."
+        )
+
     with open(file_path, "r") as file:
         lines = file.readlines()
         for line in lines:
