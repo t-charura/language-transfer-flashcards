@@ -24,7 +24,7 @@ def target_language(value: Optional[AvailableTargetLanguages]) -> str:
         if settings.TARGET_LANGUAGE is None:
             raise typer.BadParameter(get_missing_parameter_message("Target language"))
         return settings.TARGET_LANGUAGE.value
-    return value
+    return value.value
 
 
 def api_key(value: Optional[str]):
