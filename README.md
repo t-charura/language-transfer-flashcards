@@ -13,7 +13,7 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
 	<img src="https://img.shields.io/github/license/t-charura/language-transfer-flashcards?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/t-charura/language-transfer-flashcards?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/t-charura/language-transfer-flashcards?style=default&logo=python&logoColor=white&color=0080ff" alt="repo-top-language">
-    <img alt="PyPI - Version" src="https://img.shields.io/pypi/v/:language-transfer-flashcards?style=default&logo=pypi&logoColor=white&color=0080ff">
+    <img src="https://img.shields.io/pypi/v/language-transfer-flashcards?style=default&logo=pypi&logoColor=white&color=0080ff" alt="PyPI - Version">
 </p>
 
 
