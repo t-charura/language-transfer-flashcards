@@ -1,10 +1,11 @@
 [tool.poetry]
 name = "language-transfer-flashcards"
-version = "0.1.0"
-description = "CLI that transforms the content of Language Transfer lessons into flashcards"
+version = "0.1.1"
+description = "CLI tool converting Language Transfer lessons into Anki flashcards, automating content extraction for efficient language learning."
 authors = ["Tendai <tendai.charura@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+homepage = "https://github.com/t-charura/language-transfer-flashcards"
 packages = [
     { include = "ltf", from = "." }
 ]
