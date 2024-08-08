@@ -51,11 +51,20 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
 
 ### Build With
 
-- <img src="docs/images/python.png" width="30" alt="python-logo" style="vertical-align:middle"> [Python](https://www.python.org/)
+<p>
+  <img src="docs/images/python.png" width="30" alt="python-logo" align="top">
+  <a href="https://www.python.org/">Python</a>
+</p>
 
--  <img src="docs/images/langchain.png" width="30" alt="langchain-logo" style="vertical-align:middle"> [LangChain](https://github.com/langchain-ai/langchain)
+<p>
+  <img src="docs/images/langchain.png" width="30" alt="langchain-logo" align="top">
+  <a href="https://github.com/langchain-ai/langchain">LangChain</a>
+</p>
 
--  <img src="docs/images/typer.png" width="55" alt="typer-logo" style="vertical-align:middle"> [Typer](https://github.com/tiangolo/typer)
+<p>
+  <img src="docs/images/typer.png" width="55" alt="typer-logo" align="top">
+  <a href="https://github.com/tiangolo/typer">Typer</a>
+</p>
 
 ## Installation
 
