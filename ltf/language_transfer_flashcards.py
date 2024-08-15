@@ -2,7 +2,7 @@ import typer
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableSerializable
 from langchain_openai import ChatOpenAI
-from openai import AuthenticationError
+from openai import AuthenticationError, NotFoundError
 from rich import print
 
 from ltf import YoutubeTranscript
@@ -71,9 +71,16 @@ class LanguageTransferFlashcards:
             )
         except AuthenticationError:
             print(
-                "Incorrect API key provided: "
-                "You can find your API key at https://platform.openai.com/account/api-keys.\n"
+                "Incorrect API key provided!\n"
+                "You can find your API key at: https://platform.openai.com/account/api-keys.\n"
                 "Please update the value in your .env file."
+            )
+            raise typer.Abort()
+        except NotFoundError:
+            print(
+                f'The model "{llm.model_name}" does not exist or you do not have access to it.\n'
+                f"You can find all available models at: https://platform.openai.com/docs/models\n"
+                f"Please update the value in your .env file."
             )
             raise typer.Abort()
 

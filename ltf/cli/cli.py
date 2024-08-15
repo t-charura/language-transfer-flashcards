@@ -5,7 +5,7 @@ from ltf import LanguageTransferFlashcards
 from ltf import utils
 from ltf.cli import validate
 from ltf.config import ENV_DIR
-from ltf.models import AvailableTargetLanguages, AvailableModels
+from ltf.models import AvailableTargetLanguages
 
 app = typer.Typer(name="Language Transfer Flashcards")
 
@@ -25,11 +25,11 @@ def create_flashcards(
         callback=validate.target_language,
         help="Target language taught in video. If None, takes value from .env file, located in: ~/.ltf/.env",
     ),
-    model_name: AvailableModels = typer.Option(
+    model_name: str = typer.Option(
         None,
         "--model",
         "-m",
-        help="OpenAI model name to use. If None, takes value from .env file, located in: ~/.ltf/.env",
+        help="OpenAI model name. If None, takes value from .env file. Defaults to gpt-4o if .env file does not exist",
     ),
     api_key: str = typer.Option(
         None,
