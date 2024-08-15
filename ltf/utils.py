@@ -37,7 +37,7 @@ def initialize_llm(api_key: str, model_name: str) -> ChatOpenAI:
     )
 
 
-def clean_youtube_title(video_title: str) -> str:
+def clean_youtube_video_title(video_title: str) -> str:
     """
     Remove unwanted characters from the YouTube video title, because the title is used as a filename.
 
@@ -47,7 +47,7 @@ def clean_youtube_title(video_title: str) -> str:
     Returns:
         The cleaned video title
     """
-    allowed_chars = re.sub(r"[^a-z0-9 ]", "", video_title.lower()).strip()
+    allowed_chars = re.sub(r"[^a-z0-9_ ]", "", video_title.lower()).strip()
     return re.sub(r"\s+", " ", allowed_chars).replace(" ", "_")[0:200]
 
 
@@ -68,7 +68,6 @@ def save_flashcards_as_csv(
     """
     existing_flashcards = _load_existing_flashcards(exclude) if exclude else set()
 
-    filename = f"{clean_youtube_title(filename)}.csv"
     with open(filename, "w", newline="", encoding="utf-8") as csvfile:
         writer = csv.writer(csvfile, delimiter=delimiter)
 
@@ -118,7 +117,6 @@ def save_prompt_as_txt(prompt: str, filename: str) -> None:
         prompt: The prompt to be saved as a text file.
         filename: The name of the text file to be created.
     """
-    filename = f"{clean_youtube_title(filename)}.txt"
     with open(filename, "w", encoding="utf-8") as file:
         file.write(prompt)
 

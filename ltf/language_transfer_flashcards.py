@@ -102,7 +102,10 @@ class LanguageTransferFlashcards:
 
         flashcards = self._create_flashcards(llm=llm)
         utils.save_flashcards_as_csv(
-            flashcards, filename=self.title, delimiter=delimiter, exclude=exclude
+            flashcards,
+            filename=f"{utils.clean_youtube_video_title(self.title)}.csv",
+            delimiter=delimiter,
+            exclude=exclude,
         )
 
     def save_prompt(self) -> None:
@@ -115,4 +118,7 @@ class LanguageTransferFlashcards:
             }
         ).text
 
-        utils.save_prompt_as_txt(prompt_as_string, filename=self.title)
+        utils.save_prompt_as_txt(
+            prompt_as_string,
+            filename=f"{utils.clean_youtube_video_title(self.title)}.txt",
+        )
