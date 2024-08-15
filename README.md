@@ -122,6 +122,8 @@ Without the .env file, specify your target-language, the OpenAI model name and A
 ltf csv https://www.youtube.com/watch?v=VIDEO_ID -l Swahili -m gpt-4o -k "YOUR_OPENAI_API_KEY"
 ```
 
+**Important:** Find the YouTube URLs for all Language Transfer lessons [here](https://www.youtube.com/@LanguageTransfer/playlists).
+
 ### Usage without using the OpenAI API
 
 Download the full prompt which is used to extract the content of the language lesson in a txt file.
