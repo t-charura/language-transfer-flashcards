@@ -100,7 +100,9 @@ Not sure where to create the .env file in your system?
 ltf env-location
 ```
 
-To see all valid values for the variables `OPENAI_MODEL_NAME` and `TARGET_LANGUAGE`
+To see all available OpenAI model names, check the [official docs](https://platform.openai.com/docs/models).
+
+To see all valid values for `TARGET_LANGUAGE`
 
 ``` bash
 ltf csv --help
@@ -149,9 +151,9 @@ If there is no .env file, add your target-language to the command, for example: 
 - **Content Discrepancies:** Flashcards may sometimes differ from the exact lesson content due to transcript and AI
   limitations. Review your final flashcards before importing them into Anki.
 - **Technical Requirements:** Basic command-line knowledge is needed.
-- **API Costs:**
-    - gpt-4o: ~$0.01 per lesson
-    - gpt-4o-mini: < $0.0005 per lesson
+- **Estimated API Costs per Lesson:**
+    - gpt-4o: ~$0.01
+    - gpt-4o-mini: < $0.0005
 
 ## Anki: CSV Import
 
