@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     # The language you are currently learning form Language Transfer
     TARGET_LANGUAGE: Optional[AvailableTargetLanguages] = None
 
+    # Testing
+    FULL_CLI_TEST_WITH_EXTERNAL_DEPENDENCIES: bool = False
+
+    # Load settings from .env file
     model_config = SettingsConfigDict(env_file=(ENV_DIR / ".env"))
 
 
