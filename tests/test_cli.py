@@ -1,7 +1,8 @@
 import csv
+from pathlib import Path
+
 import pytest
 from typer.testing import CliRunner
-from pathlib import Path
 
 from ltf.cli import app
 from ltf.config import settings
