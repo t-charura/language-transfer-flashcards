@@ -85,6 +85,11 @@ pip install language-transfer-flashcards
 poetry add language-transfer-flashcards
 ```
 
+To verify that everything works and to see all available commands  
+``` bash
+ltf --help
+```
+
 ### Configuration with .env file [optional, but recommended]
 
 Create a `.env` file in your home directory under `~/.ltf/.env` with the following variables:
