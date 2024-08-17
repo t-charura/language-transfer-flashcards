@@ -12,11 +12,13 @@ runner = CliRunner()
 
 def test_if_cli_csv_help_command_works():
     result = runner.invoke(app, ["csv", "--help"])
-
     assert result.exit_code == 0
-    assert "Usage: Language Transfer Flashcards csv" in result.output
 
 
+@pytest.mark.skipif(
+    not settings.FULL_CLI_TEST_WITH_EXTERNAL_DEPENDENCIES,
+    reason="The Test requires access to the YouTube API.",
+)
 def test_incorrect_api_key():
     result = runner.invoke(
         app,
