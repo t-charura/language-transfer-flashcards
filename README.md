@@ -13,7 +13,8 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
 	<img src="https://img.shields.io/github/license/t-charura/language-transfer-flashcards?style=default&logo=opensourceinitiative&logoColor=white&color=0080ff" alt="license">
 	<img src="https://img.shields.io/github/last-commit/t-charura/language-transfer-flashcards?style=default&logo=git&logoColor=white&color=0080ff" alt="last-commit">
 	<img src="https://img.shields.io/github/languages/top/t-charura/language-transfer-flashcards?style=default&logo=python&logoColor=white&color=0080ff" alt="repo-top-language">
-    <img src="https://img.shields.io/pypi/v/language-transfer-flashcards?style=default&logo=pypi&logoColor=white&color=0080ff" alt="PyPI - Version">
+	<img src="https://img.shields.io/pypi/v/language-transfer-flashcards?style=default&logo=pypi&logoColor=white&color=0080ff" alt="PyPI - Version">
+	<img src="https://img.shields.io/github/actions/workflow/status/t-charura/language-transfer-flashcards/.github%2Fworkflows%2FCI.yaml?logo=githubactions" alt="github-actions">
 </p>
 
 
@@ -23,7 +24,7 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
   <a href='#usage'>Usage</a> •
   <a href='#limitations'>Limitations</a> •
   <a href='#anki-csv-import'>Anki: CSV Import</a> •
-  <a href='#next-steps'>Next Steps</a> •
+  <a href='#roadmap'>Roadmap</a> •
   <a href='#contact'>Contact</a>
 </p>
 
