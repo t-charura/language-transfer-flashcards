@@ -12,7 +12,7 @@ app = typer.Typer(name="Language Transfer Flashcards")
 
 @app.command(
     name="csv",
-    help="Create flashcards from Language-Transfer YouTube videos in CSV format",
+    help="Create flashcards from Language Transfer YouTube videos in CSV format",
 )
 def create_flashcards(
     url: str = typer.Argument(
@@ -49,7 +49,7 @@ def create_flashcards(
     ),
 ):
     flashcard_extraction = LanguageTransferFlashcards(
-        url, target_language=target_language
+        url, target_language=target_language.value
     )
     flashcard_extraction.run(
         model_name=model_name, api_key=api_key, delimiter=delimiter, exclude=exclude
@@ -73,7 +73,7 @@ def create_prompt(
     ),
 ):
     flashcard_extraction = LanguageTransferFlashcards(
-        url, target_language=target_language
+        url, target_language=target_language.value
     )
     flashcard_extraction.save_prompt()
 

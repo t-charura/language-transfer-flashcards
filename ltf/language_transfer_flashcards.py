@@ -1,4 +1,7 @@
+from typing import Union
+
 import typer
+from langchain_core.prompt_values import PromptValue
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnableSerializable
 from langchain_openai import ChatOpenAI
@@ -47,6 +50,26 @@ class LanguageTransferFlashcards:
         structured_output_llm = llm.with_structured_output(FlashcardSet)
         return self.prompt_template | structured_output_llm
 
+    def _invoke(
+        self, obj_to_invoke: Union[RunnableSerializable, PromptTemplate]
+    ) -> Union[FlashcardSet, PromptValue]:
+        """
+        Inject variables into the LLM chain or prompt template
+
+        Args:
+            obj_to_invoke: LLM chain or prompt template
+
+        Returns:
+            The output of the LLM chain or the prompt template
+        """
+        return obj_to_invoke.invoke(
+            {
+                "video_title": self.title,
+                "target_language": self.target_language,
+                "youtube_transcript": self.transcript,
+            }
+        )
+
     def _create_flashcards(self, llm: ChatOpenAI) -> FlashcardSet:
         """
         Create flashcards consisting of English and target language translations
@@ -60,15 +83,8 @@ class LanguageTransferFlashcards:
         Raises:
             AuthenticationError: If OpenAI API key is invalid
         """
-        extraction_chain = self._get_chain(llm=llm)
         try:
-            return extraction_chain.invoke(
-                {
-                    "video_title": self.title,
-                    "target_language": self.target_language,
-                    "youtube_transcript": self.transcript,
-                }
-            )
+            return self._invoke(self._get_chain(llm=llm))
         except AuthenticationError:
             print(
                 "Incorrect API key provided!\n"
@@ -101,18 +117,19 @@ class LanguageTransferFlashcards:
         print(f"Using: [green bold]{llm.model_name}[/green bold]\n")
 
         flashcards = self._create_flashcards(llm=llm)
+
         utils.save_flashcards_as_csv(
-            flashcards, filename=self.title, delimiter=delimiter, exclude=exclude
+            flashcards,
+            filename=f"{utils.clean_youtube_video_title(self.title)}.csv",
+            delimiter=delimiter,
+            exclude=exclude,
         )
 
     def save_prompt(self) -> None:
         """Create final prompt and save it as text file."""
-        prompt_as_string = self.prompt_template.invoke(
-            {
-                "video_title": self.title,
-                "target_language": self.target_language,
-                "youtube_transcript": self.transcript,
-            }
-        ).text
+        prompt_as_string = self._invoke(self.prompt_template).text
 
-        utils.save_prompt_as_txt(prompt_as_string, filename=self.title)
+        utils.save_prompt_as_txt(
+            prompt_as_string,
+            filename=f"{utils.clean_youtube_video_title(self.title)}.txt",
+        )
