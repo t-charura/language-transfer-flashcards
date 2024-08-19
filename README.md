@@ -177,6 +177,6 @@ If there is no .env file, add your target-language to the command, for example: 
 
 ## Contact
 
-- **Website:** Coming Soon
-- **Email:** tendai.charura@gmail.com
+- **Website:** https://charura.com
+- **Email:** tendai@charura.com
 - **GitHub:** [t-charura](https://github.com/t-charura)
