@@ -37,18 +37,18 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
 
 ### Key Features
 
-- **Automated Extraction:** Extracts words, phrases, and sentences with translations from Language Transfer YouTube
+- **🤖 Automated Extraction:** Extracts words, phrases, and sentences with translations from Language Transfer YouTube
   lessons.
-- **Anki Integration:** Generates CSV files ready for direct import into Anki, creating instant flashcard decks (OpenAI
+- **📚 Anki Integration:** Generates CSV files ready for direct import into Anki, creating instant flashcard decks (OpenAI
   API key required).
-- **Alternative Workflow:** Download a text file, containing the prompt and lesson transcript to use with your favorite
+- **🔄 Alternative Workflow:** Download a text file, containing the prompt and lesson transcript to use with your favorite
   LLM web interface (e.g., ChatGPT, Claude, etc.).
 
 ### Why it's Valuable?
 
-- **Boost Learning Efficiency:** Combine Language Transfer's proven method with Anki's powerful spaced repetition.
-- **Save Time:** Automate hours of manual flashcard creation.
-- **Customizable:** Adapt to your preferred workflow, with or without API access.
+- **🚀 Boost Learning Efficiency:** Combine Language Transfer's proven method with Anki's powerful spaced repetition.
+- **⏱️ Save Time:** Automate hours of manual flashcard creation.
+- **🛠️ Customizable:** Adapt to your preferred workflow, with or without API access.
 
 ### Build With
 
@@ -177,6 +177,12 @@ If there is no .env file, add your target-language to the command, for example: 
 
 ## Contact
 
-- **Website:** Coming Soon
-- **Email:** tendai.charura@gmail.com
-- **GitHub:** [t-charura](https://github.com/t-charura)
+- **🌐 Website:** [https://charura.com](https://charura.com)
+- **📧 Email:** tendai@charura.com
+- **👨‍💻 GitHub:** [@t-charura](https://github.com/t-charura)
+
+---
+
+<p align="center">
+  If you find Language Transfer Flashcards helpful, please consider giving it a ⭐️ on GitHub!
+</p>
