@@ -34,6 +34,7 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
 ---
 
 ## About the Project
+You can also read more about this project in my [Medium blog post](https://medium.com/@tendai.charura/transform-language-transfer-lessons-into-anki-flashcards-ac0dd254470e).
 
 ### Key Features
 
