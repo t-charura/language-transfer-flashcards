@@ -82,6 +82,7 @@ class LanguageTransferFlashcards:
 
         Raises:
             AuthenticationError: If OpenAI API key is invalid
+            NotFoundError: If the model does not exist, or you do not have access to it
         """
         try:
             return self._invoke(self._get_chain(llm=llm))
