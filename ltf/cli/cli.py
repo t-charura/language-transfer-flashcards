@@ -47,9 +47,15 @@ def create_flashcards(
         "-e",
         help="Directory containing CSV files with words and sentences to exclude",
     ),
+    file_name: str = typer.Option(
+        None,
+        "--file-name",
+        "-f",
+        help="Name of the CSV file to create",
+    ),
 ):
     flashcard_extraction = LanguageTransferFlashcards(
-        url, target_language=target_language.value
+        url, target_language=target_language.value, file_name=file_name
     )
     flashcard_extraction.run(
         model_name=model_name, api_key=api_key, delimiter=delimiter, exclude=exclude

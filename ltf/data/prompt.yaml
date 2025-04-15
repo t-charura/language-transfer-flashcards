@@ -1,5 +1,5 @@
 template: |
-  The following is a YouTube transcript from a video titled "{video_title}".
+  The following is a YouTube transcript from a language lessen between a teacher and a student.
   
   *** Your Task ***
   Act as a language expert fluent in both {target_language} and English.
@@ -28,11 +28,8 @@ template: |
   Example (for a hypothetical Swahili lesson):
   English; Swahili
   to sleep; kulala
-  to eat; kula
   to want; kutaka
-  Sleep well; Lala salama
   I want to go out; Nataka kutoka
-  Where do you want to go?; Unataka kwenda wapi?
   Where are you traveling now?; Unasafiri wapi sasa?
   
   *** YouTube Transcript of the Language Lesson ***

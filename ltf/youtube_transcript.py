@@ -1,24 +1,23 @@
 import re
-from typing import Tuple
 
 from langchain_community.document_loaders import YoutubeLoader
 
 
 class YoutubeTranscript:
     """
-    This class provides functionality to retrieve the transcript and title
-    of a YouTube video given its URL, and clean the text for further processing.
+    This class provides functionality to retrieve the transcript of a YouTube video given its URL,
+    and clean the text for further processing.
     """
 
-    def download_from_url(self, video_url: str) -> Tuple[str, str]:
+    def download_from_url(self, video_url: str) -> str:
         """
-        Download the transcript and title of a YouTube video, based on the URL.
+        Download the transcript of a YouTube video, based on the URL.
 
         Args:
             video_url: The URL of the YouTube video. Example: "https://www.youtube.com/watch?v=VIDEO_ID"
 
         Returns:
-            The title and transcript of the YouTube video.
+            The transcript of the YouTube video.
 
         Raises:
             ValueError: If the URL is not valid.
@@ -27,9 +26,10 @@ class YoutubeTranscript:
         try:
             # Try loading the transcript from the YouTube URL - not all videos have transcripts
             loader = YoutubeLoader.from_youtube_url(
-                youtube_url=video_url, language="en", add_video_info=True
+                youtube_url=video_url, language="en", add_video_info=False
             )
             yt_document = loader.load()[0]
+            return self._clean_text(yt_document.page_content)
         except ValueError:
             raise ValueError(
                 "Please provide a valid YouTube URL "
@@ -39,11 +39,6 @@ class YoutubeTranscript:
             raise IndexError(
                 "Video does not have a transcript. Please try another video."
             )
-
-        return (
-            self._clean_text(yt_document.metadata.get("title")),
-            self._clean_text(yt_document.page_content),
-        )
 
     @staticmethod
     def _clean_text(text: str) -> str:

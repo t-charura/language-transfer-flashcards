@@ -22,7 +22,7 @@ class LanguageTransferFlashcards:
     process them with a language model, and generate flashcards.
     """
 
-    def __init__(self, url: str, target_language: str):
+    def __init__(self, url: str, target_language: str, file_name: str):
         """
         Initialize the LanguageTransferFlashcards class
 
@@ -30,11 +30,14 @@ class LanguageTransferFlashcards:
             url: URL of the YouTube video
             target_language: The language that is taught in the YouTube video
         """
-        self.title, self.transcript = YoutubeTranscript().download_from_url(url)
+        self.transcript = YoutubeTranscript().download_from_url(url)
         self.target_language = target_language
+        self.file_name = (
+            file_name if file_name else f"{self.target_language.lower()}_lesson"
+        )
         self.prompt_template = PromptTemplate(
             template=utils.load_template(),
-            input_variables=["video_title", "target_language", "youtube_transcript"],
+            input_variables=["target_language", "youtube_transcript"],
         )
 
     def _get_chain(self, llm: ChatOpenAI) -> RunnableSerializable:
@@ -64,7 +67,6 @@ class LanguageTransferFlashcards:
         """
         return obj_to_invoke.invoke(
             {
-                "video_title": self.title,
                 "target_language": self.target_language,
                 "youtube_transcript": self.transcript,
             }
@@ -101,7 +103,13 @@ class LanguageTransferFlashcards:
             )
             raise typer.Abort()
 
-    def run(self, model_name: str, api_key: str, delimiter: str, exclude: str) -> None:
+    def run(
+        self,
+        model_name: str,
+        api_key: str,
+        delimiter: str,
+        exclude: str,
+    ) -> None:
         """
         Create Flashcards from YouTube video and save them as CSV file
 
@@ -121,7 +129,7 @@ class LanguageTransferFlashcards:
 
         utils.save_flashcards_as_csv(
             flashcards,
-            filename=f"{utils.clean_youtube_video_title(self.title)}.csv",
+            filename=f"{self.file_name}.csv",
             delimiter=delimiter,
             exclude=exclude,
         )
@@ -132,5 +140,5 @@ class LanguageTransferFlashcards:
 
         utils.save_prompt_as_txt(
             prompt_as_string,
-            filename=f"{utils.clean_youtube_video_title(self.title)}.txt",
+            filename=f"{self.file_name}.csv",
         )
