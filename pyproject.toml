@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "language-transfer-flashcards"
-version = "0.1.2"
+version = "0.1.3"
 description = "CLI tool converting Language Transfer lessons into Anki flashcards, automating content extraction for efficient language learning."
 authors = ["Tendai <tendai.charura@gmail.com>"]
 license = "MIT"
