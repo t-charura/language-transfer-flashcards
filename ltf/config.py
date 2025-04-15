@@ -11,7 +11,7 @@ ENV_DIR = Path.home() / ".ltf"
 class Settings(BaseSettings):
     # OPENAI settings
     OPENAI_API_KEY: Optional[str] = None
-    OPENAI_MODEL_NAME: str = "gpt-4o"
+    OPENAI_MODEL_NAME: str = "gpt-4.1-mini"
 
     # The language you are currently learning form Language Transfer
     TARGET_LANGUAGE: Optional[AvailableTargetLanguages] = None

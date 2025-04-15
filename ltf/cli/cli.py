@@ -29,7 +29,7 @@ def create_flashcards(
         None,
         "--model",
         "-m",
-        help="OpenAI model name. If None, takes value from .env file. Defaults to gpt-4o if .env file does not exist",
+        help="OpenAI model name. If None, takes value from .env file. Defaults to gpt-4.1-mini if .env file does not exist",
     ),
     api_key: str = typer.Option(
         None,

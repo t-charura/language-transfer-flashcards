@@ -96,7 +96,7 @@ Create a `.env` file in your home directory under `~/.ltf/.env` with the followi
 
 ``` properties
 OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>
-OPENAI_MODEL_NAME=gpt-4o
+OPENAI_MODEL_NAME=gpt-4.1-mini
 TARGET_LANGUAGE=Swahili
 ```
 
@@ -127,7 +127,7 @@ ltf csv https://www.youtube.com/watch?v=VIDEO_ID  # assumes .env file exists
 Without the .env file, specify your target-language, the OpenAI model name and API key
 
 ``` bash
-ltf csv https://www.youtube.com/watch?v=VIDEO_ID -l Swahili -m gpt-4o -k "YOUR_OPENAI_API_KEY"
+ltf csv https://www.youtube.com/watch?v=VIDEO_ID -l Swahili -m gpt-4.1-mini -k "YOUR_OPENAI_API_KEY"
 ```
 
 **Important:** Find the YouTube URLs for all Language Transfer lessons [here](https://www.youtube.com/@LanguageTransfer/playlists).
