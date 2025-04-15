@@ -18,15 +18,13 @@ def mock_loader():
 
 def test_download_from_url_success(youtube_transcript, mock_loader):
     mock_document = MagicMock()
-    mock_document.metadata = {"title": "Test Title"}
     mock_document.page_content = "Test Content"
     mock_loader.from_youtube_url.return_value.load.return_value = [mock_document]
 
-    title, transcript = youtube_transcript.download_from_url(
+    transcript = youtube_transcript.download_from_url(
         "https://www.youtube.com/watch?v=VIDEO_ID"
     )
 
-    assert title == "Test Title"
     assert transcript == "Test Content"
     mock_loader.from_youtube_url.assert_called_once()
 
