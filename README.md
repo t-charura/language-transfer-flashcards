@@ -24,6 +24,7 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
   <a href='#usage'>Usage</a> •
   <a href='#limitations'>Limitations</a> •
   <a href='#anki-csv-import'>Anki: CSV Import</a> •
+  <a href='#known-issues'>Known Issues</a> •
   <a href='#roadmap'>Roadmap</a> •
   <a href='#contact'>Contact</a>
 </p>
@@ -34,15 +35,19 @@ Transfer YouTube lessons into easily digestible flashcards, allowing learners to
 ---
 
 ## About the Project
-You can also read more about this project in my [Medium blog post](https://medium.com/@tendai.charura/transform-language-transfer-lessons-into-anki-flashcards-ac0dd254470e).
+
+You can also read more about this project in
+my [Medium blog post](https://medium.com/@tendai.charura/transform-language-transfer-lessons-into-anki-flashcards-ac0dd254470e).
 
 ### Key Features
 
 - **🤖 Automated Extraction:** Extracts words, phrases, and sentences with translations from Language Transfer YouTube
   lessons.
-- **📚 Anki Integration:** Generates CSV files ready for direct import into Anki, creating instant flashcard decks (OpenAI
+- **📚 Anki Integration:** Generates CSV files ready for direct import into Anki, creating instant flashcard decks (
+  OpenAI
   API key required).
-- **🔄 Alternative Workflow:** Download a text file, containing the prompt and lesson transcript to use with your favorite
+- **🔄 Alternative Workflow:** Download a text file, containing the prompt and lesson transcript to use with your
+  favorite
   LLM web interface (e.g., ChatGPT, Claude, etc.).
 
 ### Why it's Valuable?
@@ -86,7 +91,8 @@ pip install language-transfer-flashcards
 poetry add language-transfer-flashcards
 ```
 
-To verify that everything works and to see all available commands  
+To verify that everything works and to see all available commands
+
 ``` bash
 ltf --help
 ```
@@ -122,23 +128,24 @@ ltf csv --help
 Create flashcards in CSV format - file will be saved in current working directory
 
 ``` bash
-ltf csv https://www.youtube.com/watch?v=VIDEO_ID  # assumes .env file exists
+ltf csv "https://www.youtube.com/watch?v=VIDEO_ID"  # assumes .env file exists
 ```
 
 Without the .env file, specify your target-language, the OpenAI model name and API key
 
 ``` bash
-ltf csv https://www.youtube.com/watch?v=VIDEO_ID -l Swahili -m gpt-4.1-mini -k "YOUR_OPENAI_API_KEY"
+ltf csv "https://www.youtube.com/watch?v=VIDEO_ID" -l Swahili -m "gpt-4.1-mini" -k "YOUR_OPENAI_API_KEY"
 ```
 
-**Important:** Find the YouTube URLs for all Language Transfer lessons [here](https://www.youtube.com/@LanguageTransfer/playlists).
+**Important:** Find the YouTube URLs for all Language Transfer
+lessons [here](https://www.youtube.com/@LanguageTransfer/playlists).
 
 ### Usage without using the OpenAI API
 
 Download the full prompt which is used to extract the content of the language lesson in a txt file.
 
 ``` bash
-ltf prompt https://www.youtube.com/watch?v=VIDEO_ID  # assumes .env file exists
+ltf prompt "https://www.youtube.com/watch?v=VIDEO_ID"  # assumes .env file exists
 ```
 
 If there is no .env file, add your target-language to the command, for example: `-l Swahili`
@@ -169,6 +176,20 @@ If there is no .env file, add your target-language to the command, for example: 
 3. Navigate to `File` > `Import`
 4. Select your generated CSV file for upload
 5. Select the correct seperator for your CSV file, configure `Import options` and click on `Import`
+
+## Known Issues
+
+- On Windows PowerShell, URLs with `&` characters—often from playlist links like
+  ``` bash
+  ltf csv "https://www.youtube.com/watch?v=VIDEO_ID&list=PLAYLIST_ID"
+  ```
+  can cause PowerShell to misinterpret parts of the URL as separate commands showing terminal messages like:
+  ```powerhsells
+  'list' is not recognized as an internal or external command,
+  operable program or batch file.
+  ```
+  The command still runs successfully. Since the playlist part is usually not needed, you can shorten the URL to just
+  the video or escape `&` with a backtick in PowerShell
 
 ## Roadmap
 
