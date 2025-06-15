@@ -31,7 +31,7 @@ def initialize_llm(api_key: str, model_name: str) -> ChatOpenAI:
         LLM instance
     """
     return ChatOpenAI(
-        model_name=model_name,
+        model=model_name,
         api_key=api_key,
         temperature=0,
     )
@@ -140,7 +140,6 @@ def env_information(file_path: Path) -> str:
         f"--> [green bold]{file_path}[/green bold] <--\n\n"
         "File must contain the following variables: 'OPENAI_API_KEY', 'OPENAI_MODEL_NAME' and 'TARGET_LANGUAGE'. \n"
         "To see all valid values for these variables, run 'ltf csv --help'\n\n"
-        # TODO: update link for example .env file (add a screenshot to README)
         "Check https://github.com/t-charura/language-transfer-flashcards for an example .env file."
     )
 
